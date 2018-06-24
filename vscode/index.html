@@ -1,8 +1,134 @@
 <html>
     <head>
-
+        <style>
+            body {
+                color: lightgrey;
+                background-color: gray;
+                margin: 0px auto;
+                padding: 0px;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                font-size: 40px;
+            }
+            #dashboard {
+                position: absolute;
+                width: 1024px;
+                height: 768;
+                background-color: black;
+            }
+            #header {
+            }
+            #datum {
+                width: 256px;
+                height: 100;
+                line-height: 100px;
+                line-height: 100px;
+                text-align: left;
+                background-color: rgb(65, 65, 65);
+                float: left;
+            }
+            #wetter {
+                width: 512px;
+                height: 100px;
+                text-align: center;
+                background-color: rgb(84, 84, 84);
+                float: left;
+            }
+            #icon {
+                width: 100px;
+                height: 100px;
+                float: left;
+                background-image: url("http://vortex.accuweather.com/adc2010/images/slate/icons/40.svg");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: rgb(84, 84, 84);
+            }
+            #temp-panel {
+                width: 100px;
+                height: 100px;
+                line-height: 100px;
+                float: left;
+                background-color: rgb(65, 65, 65);
+                margin: auto;
+                vertical-align: middle;
+            }
+            #temp-small {
+                font-size: 75%;
+            }
+            #cond-panel {
+                height: 100px;
+                display: table;
+                background-color: rgb(84, 84, 84);
+            }
+            #cond-text {
+                font-size: 75%;
+                display: table-cell;
+                vertical-align: middle;
+                background-color: rgb(59, 58, 58);
+            }
+            #zeit {
+                width: 256px;
+                height: 100;
+                line-height: 100px;
+                text-align: right;
+                background-color: rgb(65, 65, 65);
+                float: left;
+            }
+            #content-panel {
+                clear: both;
+            }
+            #content-left {
+                width: 512px;
+                height: 668px;
+                float: left;
+                background-color: rgb(58, 58, 58);
+            }
+            #content-right {
+                width: 512px;
+                height: 668px;
+                float: left;
+            }
+        </style>
     </head>
     <body>
-        
+        <div id="dashboard">
+            <div id="header">
+                <div id="datum">13. Jul 2018</div>
+                <div id="wetter">
+                    <div id="temp-panel">29<span id="temp-small">&deg;C</span></div>
+                    <div id="icon"></div>
+                    <div id="cond-panel"><div id="cond-text">Windig, nachts einige Schauer</div></div>
+                </div>
+                <div id="zeit">07:35</div>
+            </div>
+            <div id="content-panel">
+                <div id="content-left">
+                    <table>
+                        <tr>
+                            <th>bbe</th>
+                            <th>bbi</th>
+                            <th>bma</th>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>                    
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>                    
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>                    
+                    </table>
+                </div>
+                <div id="content-right">
+                    Bild
+                </div>
+            </div>
+        </div>
     </body>
 </html>
