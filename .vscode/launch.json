@@ -1,0 +1,12 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "run - BeluApp",
+            "mainClass": "bob.belu.BeluApp",
+            "projectName": "belu",
+            "args": [ "-path=\"C:\\Entwicklung\\Projekte\\belu\\demo\"", "" ]
+        }
+    ]
+}

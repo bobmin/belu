@@ -1,5 +1,39 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="beluData.js"></script>
+        <script>
+            function xx(val) {
+                var x = "00" + val;
+                return (x.substr(x.length - 2));
+            }
+            function startTimer() {
+                console.log('configure timer...');
+                var x = setInterval(function() {
+                    var now = new Date();
+                    // Datum
+                    var day = now.getDate();
+                    var month = now.getMonth() + 1;
+                    var year = now.getFullYear();
+                    // Zeit
+                    var hours = now.getHours();
+                    var minutes = now.getMinutes();
+                    // Ausgabe
+                    document.getElementById("datum").innerHTML = xx(day) + "." + xx(month) + "." + year;
+                    document.getElementById("zeit").innerHTML = xx(hours) + ":" + xx(minutes);
+                    // console.log('date and time updated');
+                }, 1000);
+            }
+            function publishWeather() {
+                console.log('publish weather...');
+                document.getElementById("temp").innerHTML = weatherTemp;
+                document.getElementById("cond-text").innerHTML = weatherCond;
+                document.getElementById("icon").style.backgroundImage = 'url("http://vortex.accuweather.com/adc2010/images/slate/icons/' + weatherIcon + '.svg")';
+            }
+        </script>
         <style>
             body {
                 color: lightgrey;
@@ -96,7 +130,7 @@
             <div id="header">
                 <div id="datum">13. Jul 2018</div>
                 <div id="wetter">
-                    <div id="temp-panel">29<span id="temp-small">&deg;C</span></div>
+                    <div id="temp-panel"><span id="temp">29</span><span id="temp-small">&deg;C</span></div>
                     <div id="icon"></div>
                     <div id="cond-panel"><div id="cond-text">Windig, nachts einige Schauer</div></div>
                 </div>
@@ -132,5 +166,12 @@
                 </div>
             </div>
         </div>
+        <script>
+            window.onload = function () {
+                console.log('page loaded');
+                startTimer();
+                publishWeather();
+            }
+        </script>
     </body>
 </html>
