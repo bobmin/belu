@@ -2,11 +2,35 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BilderKopierer",
             "request": "launch",
-            "name": "run - BeluApp",
+            "mainClass": "bob.belu.BilderKopierer",
+            "projectName": "belu",
+            "args": [
+                "-path=\"U:\\Bilder\"",
+                "-to=\"C:\\Entwicklung\\Projekte\\belu\\demo\""
+            ]
+        },
+        {
+            "type": "java",
+            "name": "BilderOrdner",
+            "request": "launch",
+            "mainClass": "bob.belu.BilderOrdner",
+            "projectName": "belu",
+            "args": [
+                "-path=\"U:\\Bilder\""
+            ]
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "BeluApp",
             "mainClass": "bob.belu.BeluApp",
             "projectName": "belu",
-            "args": [ "-path=\"C:\\Entwicklung\\Projekte\\belu\\demo\"", "" ]
+            "args": [
+                "-path=\"C:\\Entwicklung\\Projekte\\belu\\demo\"",
+                ""
+            ]
         }
     ]
 }

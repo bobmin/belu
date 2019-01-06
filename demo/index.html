@@ -4,8 +4,17 @@
         <meta charset="UTF-8">
         <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="beluData.js"></script>
+        <script src="beluWeather.js"></script>
+        <script src="beluImages.js"></script>
         <script>
+            var imageDelay = 0;
+            var imageIndex = 0;
+            var imageView = -1;
+
+            // Bilder in contentRight
+            var maxWidth = 576;
+            var maxHeight = 600;   
+
             function xx(val) {
                 var x = "00" + val;
                 return (x.substr(x.length - 2));
@@ -25,6 +34,69 @@
                     document.getElementById("datum").innerHTML = xx(day) + "." + xx(month) + "." + year;
                     document.getElementById("zeit").innerHTML = xx(hours) + ":" + xx(minutes);
                     // console.log('date and time updated');
+
+                    imageDelay += 1;
+                    if (5 < imageDelay) {
+                        imageIndex += 1;
+                        if (9 < imageIndex) {
+                            imageIndex = 0;
+                        }
+                        imageDelay = 0;
+                    }
+                    // console.log('imageDelay = ' + imageDelay + ", imageIndex = " + imageIndex);
+                    if (imageView != imageIndex) {
+                        console.log('show image ' + imageIndex + '...');
+
+                        var img = new Image();
+
+                        var canvas = document.getElementById('canvas-image');
+                        var ctx = canvas.getContext('2d');
+
+                        var canvasCopy = document.createElement("canvas");
+                        var copyContext = canvasCopy.getContext("2d");
+
+                        img.onload = function() {
+
+                            var a,b;
+                            if (imageFiles[imageIndex][3] == 'Right top') {
+                                b = img.width;
+                                a = img.height;
+                            } else {
+                                a = img.width;
+                                b = img.height;
+                            }
+
+                            var ratioWidth = 1;
+                            if(a > maxWidth) {
+                                ratioWidth = maxWidth / a;
+                            }                             
+                            var ratioHeight = 1;
+                            if(b > maxHeight) {
+                                ratioHeight = maxHeight / b;
+                            }
+                            var ratio = Math.min(ratioWidth, ratioHeight);
+
+                            canvasCopy.width = img.width;
+                            canvasCopy.height = img.height;
+
+                            copyContext.drawImage(img, 0, 0);
+
+                            canvas.width = img.width * ratio;
+                            canvas.height = img.height * ratio;
+
+                            if (imageFiles[imageIndex][imageIndex] == 'Right top') {
+                                copyContext.translate(copyContext.canvas.width * 0.5, copyContext.canvas.height * 0.5);    // center
+                                copyContext.rotate(Math.PI * 0.5);                                         // 90°
+                                copyContext.translate(-copyContext.canvas.width * 0.5, -copyContext.canvas.height * 0.5);
+                            }
+                            ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
+
+                        }
+                        img.src = imageIndex + '.JPG';
+
+                        imageView = imageIndex;
+                    }
+
                 }, 1000);
             }
             function publishWeather() {
@@ -121,7 +193,9 @@
                 height: 640px;
                 float: left;
                 background-color: darkslategrey;
-                display: none;
+            }
+            canvas {
+                border: 1px solid darkgray;
             }
         </style>
     </head>
@@ -162,7 +236,7 @@
                     </table>
                 </div>
                 <div id="content-right">
-                    Bild
+                    <canvas id="canvas-image" width="576" height="600"></canvas>
                 </div>
             </div>
         </div>
