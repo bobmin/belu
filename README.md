@@ -1,7 +1,8 @@
 # belu
 
 ![](https://img.shields.io/github/languages/code-size/bobmin/belu.svg?style=flat) 
-![](https://img.shields.io/github/last-commit/bobmin/belu.svg?style=flat)
+![](https://img.shields.io/github/last-commit/bobmin/belu.svg?style=flat) 
+![](https://img.shields.io/github/languages/top/bobmin/belu.svg?style=flat)
 
 [3 tips for organizing your open source project's workflow on GitHub](https://opensource.com/article/18/4/keep-your-project-organized-git-repo)
 
