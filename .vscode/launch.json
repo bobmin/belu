@@ -3,6 +3,27 @@
         {
             "type": "java",
             "request": "launch",
+            "name": "HoleSeite",
+            "mainClass": "bob.belu.HoleSeite",
+            "projectName": "belu",
+            "args": [
+                "-url=https://www.accuweather.com/de/de/schlos-holte-stukenbrock/33758/weather-forecast/128536_pc"
+            ]
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "HeuteFinden",
+            "mainClass": "bob.belu.HeuteFinden",
+            "projectName": "belu",
+            "args": [
+                "-file=C:\\Users\\bmash\\AppData\\Local\\Temp\\holeSeite_2019-04-21.htm",
+                "-out=C:\\Entwicklung\\Projekte\\belu\\demo"
+            ]
+        },
+        {
+            "type": "java",
+            "request": "launch",
             "name": "BilderOrdner",
             "mainClass": "bob.belu.BilderOrdner",
             "projectName": "belu",

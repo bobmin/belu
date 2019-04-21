@@ -9,3 +9,29 @@
 [Managing project boards in your repository or organization](https://help.github.com/articles/managing-project-boards-in-your-repository-or-organization)
 
 [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+
+## Getting started
+
+### Wetterinfo bereitstellen
+
+Daten abrufen; schreibt `%TEMP%/holeSeite_YYYY-MM-DD.htm`
+
+`bob.belu.HoleSeite -url=https://...`
+
+Infos extrahieren
+
+`bob.belu.HeuteFinden -file=%TEMP%/holeSeite_YYYY-MM-DD.htm`
+
+### Bilder organisieren
+
+Bilderordner analysieren
+
+`bob.belu.BilderOrdner -path=X:\Bilder`
+
+Bilder auswählen
+
+`bob.belu.BilderAuswahl -path=X:\Bilder`
+
+Bilder kopieren
+
+`bob.belu.BilderKopierer -path=X:\Bilder -to=C:\Web\belu`

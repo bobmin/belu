@@ -1,3 +1,4 @@
 code/bin/
 code/target/
 demo/*.jpg
+demo/beluData_*.js

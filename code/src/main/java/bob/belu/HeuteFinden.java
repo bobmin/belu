@@ -1,26 +1,31 @@
 package bob.belu;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HeuteFinden {
 
-	private static final String REGEX = ".+[/\\\\]holeSeite_\\d{4,4}\\-(\\d{2,2})\\-(\\d{2,2})\\.htm$";
-
 	public static void main(String[] args) throws IOException {
 		String path = null;
+		String out = null;
 		for (String arg : args) {
 			if (arg.matches("-[fF][iI][lL][eE]=.*")) {
 				path = arg.substring(6);
+			} else if (arg.matches("-[oO][uU][tT]=.*")) {
+				out = arg.substring(5);
 			}
 		}
 		if (null == path) {
 			System.err.println("Datei fehlt :(");
 		} else {
-			new HeuteFinden(path);
+			new HeuteFinden(path, out);
 		}
 	}
 
@@ -30,20 +35,9 @@ public class HeuteFinden {
 
 	public String cond = null;
 
-	public HeuteFinden(final String path) throws IOException {
-		int month = 0;
-		int day = 0;
-		Pattern p = Pattern.compile(REGEX);
-		Matcher m = p.matcher(path);
-		if (m.find()) {
-			month = Integer.parseInt(m.group(1));
-			day = Integer.parseInt(m.group(2));
-		} else {
-			throw new IllegalArgumentException("Datum nicht erkannt :(");
-		}
-
+	public HeuteFinden(final String path, String out) throws IOException {
+		System.out.println("lese " + path);
 		// Laden
-		System.out.println("lese \"" + path + "\"");
 		StringBuffer buffer = new StringBuffer();
 		BufferedReader file = new BufferedReader(new FileReader(path));
 		String line = null;
@@ -52,46 +46,61 @@ public class HeuteFinden {
 		}
 		file.close();
 
-		String[] mmmAll = new String[] { "Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov",
-				"Dez" };
-		String mmm = mmmAll[month - 1];
+		String value = search("Infoblock", "(<li class=\"day current.+?</li>)", buffer.toString());
 
-		System.out.println("suche \"" + day + ". " + mmm + "\"");
+		// Icon
+		// http://vortex.accuweather.com/adc2010/images/slate/icons/16.svg
+		icon = search("Symbol", "icon i-(\\d+)-xl", value);
 
-		String value = search(".*(<h4>" + day + ". " + mmm + "</h4>.*<!-- /.bg -->).*", buffer.toString());
+		// Temperatur
+		// 9°
+		temp = search("Temperatur", "<span class=\"large-temp\">(.*)&deg;\n</span>", value);
 
-		if (null == value) {
-			System.out.println("Nicht gefunden :(");
+		// Bedingungen
+		// Windig, nachts einige Schauer
+		cond = search("Bedingungen", "<span class=\"cond\">(.*)\n</span>", value);
+
+		// Ausgabe
+		if (null == out) {
+			System.out.println("Parameter \"out\" fehlt. Keine Ausgabe!");
 		} else {
-			value = value.replaceAll("<([^<>]+)>", "\n<$1>");
-			// System.out.println(value);
-
-			// Icon
-			// http://vortex.accuweather.com/adc2010/images/slate/icons/16.svg
-			icon = search(".*icon i-(\\d\\d)-l.*", value);
-			System.out.println("Symbol: " + icon);
-
-			// Temperatur
-			// 9°
-			String largeTemp = search(".*<span class=\"large-temp\">(.*)\n</span>.*", value);
-			temp = largeTemp.replace("&deg;", "");
-			System.out.println("Temperatur: " + temp);
-
-			// Bedingungen
-			// Windig, nachts einige Schauer
-			cond = search(".*<span class=\"cond\">(.*)\n</span>.*", value);
-			System.out.println("Bedingungen: " + cond);
+			File f = new File(out, "beluData.js");
+			if (f.exists()) {
+				String ts = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+				File backup = new File(f.getAbsolutePath().replaceAll("\\.js", "_" + ts + "\\.js"));
+				f.renameTo(backup);
+				System.out.println("sichere " + backup.getAbsolutePath());
+			}
+			System.out.println("schreibe \"" + f.getAbsolutePath() + "\"");
+			FileWriter writer = new FileWriter(f);
+			writer.write("// Daten vom Wetterdienst\n");
+			writer.write("var weatherTemp = " + temp + ";\n");
+			writer.write("var weatherIcon = " + icon + ";\n");
+			writer.write("var weatherCond = \"" + cond + "\";\n");
+			writer.close();
 		}
 
 	}
 
-	private String search(String pattern, String text) {
+	private String search(String label, String pattern, String text) {
+		String t = "----- " + label + ": " + pattern.replaceAll("\\r", "\\\\r").replaceAll("\\n", "\\\\n") + " -----";
+		System.out.println(t);
+
 		String x = null;
-		Pattern p = Pattern.compile(pattern);
-		Matcher m = p.matcher(text);
-		if (m.find()) {
-			x = m.group(1).replaceAll("[\\s][\\s]+", "");
+		if (null != text) {
+			Pattern p = Pattern.compile(pattern);
+			Matcher m = p.matcher(text);
+			if (m.find()) {
+				x = m.group(1)
+					.replaceAll("[\\s][\\s]+", " ")
+					.replaceAll("<([^<>]+)>", "\n<$1>")
+					.trim();
+				System.out.println(x);
+			} else {
+				System.out.println("Nicht gefunden :(");
+			}
 		}
+		System.out.println(new String(new char[t.length()]).replace("\0", "-"));
 		return x;
 	}
 
