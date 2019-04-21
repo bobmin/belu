@@ -40,7 +40,7 @@ public class BilderAuswahl {
 			System.err.println("Pfad fehlt :(");
 		} else {
 			if (null == to) {
-				System.err.println("Keine Ausgabe. Nur Analyse.");
+				System.err.println("Parameter \"-to=\" fehlt. Keine Ausgabe. Nur Analyse.");
 			}
 			new BilderAuswahl(path, to);
 		}

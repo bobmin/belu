@@ -9,7 +9,7 @@ import javafx.scene.chart.XYChart;
 public class NN {
 
     public XYChart.Series<Number, Number> train() {
-        XYChart.Series<Number, Number> costs = new XYChart.Series();
+        XYChart.Series<Number, Number> costs = new XYChart.Series<>();
 
         double[][] X = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
         double[][] Y = {{0}, {0}, {0}, {1}};
@@ -38,7 +38,7 @@ public class NN {
             double[][] A2 = np.sigmoid(Z2);
 
             double cost = np.cross_entropy(m, Y, A2);
-            costs.getData().add(new XYChart.Data(i, cost));
+            costs.getData().add(new XYChart.Data<>(i, cost));
             // Back Prop
             //LAYER 2
             double[][] dZ2 = np.subtract(A2, Y);

@@ -1,34 +1,21 @@
 package bob.belu;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
-import java.util.Scanner;
-
-import javax.imageio.IIOImage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.imageio.stream.ImageInputStream;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -71,7 +58,7 @@ public class BilderKopierer {
 
 		File selectionFile = BeluUtils.createImageSelectionTxt(path);
 		if (!selectionFile.exists()) {
-			System.err.println("Auswahl fehlt :(");
+			System.err.println("Datei \"" + selectionFile.getName() + "\" unter \"" + selectionFile.getParent() + "\" fehlt :(");
 			System.exit(-1);
 		}
 		
@@ -176,6 +163,7 @@ public class BilderKopierer {
 		}
 	}
 
+	/*
 	private void runExternal(File path, String...args) throws IOException, InterruptedException {
 		ProcessBuilder builder = new ProcessBuilder(args);
 		builder.directory(path);
@@ -191,7 +179,9 @@ public class BilderKopierer {
 		int result = process.waitFor();			
 		System.out.println( "fertig: " + result);
 	}
+	*/
 
+	/*
 	private static void fixBadJPEG(BufferedImage img) {
         int[] ary = new int[img.getWidth() * img.getHeight()];
         img.getRGB(0, 0, img.getWidth(), img.getHeight(), ary, 0, img.getWidth());
@@ -219,7 +209,8 @@ public class BilderKopierer {
         }
         img.setRGB(0, 0, img.getWidth(), img.getHeight(), ary, 0, img.getWidth());
     }
-
+	*/
+	
 	public static ImageInformation readImageInformation(File imageFile)  throws IOException, MetadataException, ImageProcessingException {
 		Metadata metadata = ImageMetadataReader.readMetadata(imageFile);
 		Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);

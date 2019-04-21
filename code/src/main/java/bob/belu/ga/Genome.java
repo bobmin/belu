@@ -1,6 +1,6 @@
 package bob.belu.ga;
 
-import java.util.Random;
+// import java.util.Random;
 
 /**
  * Beschreibt ein Bild.
@@ -10,13 +10,13 @@ import java.util.Random;
  */
 public class Genome {
 
-	private int scale = 0;
+	// private int scale = 0;
 
 	/**
 	 * Instanziiert das Objekt für ein Bild.
 	 */
 	public Genome() {
-		this.scale = (int) (new Random().nextDouble() * 10.0);
+		// this.scale = (int) (new Random().nextDouble() * 10.0);
 	}
 
 }

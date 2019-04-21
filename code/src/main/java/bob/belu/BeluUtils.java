@@ -23,6 +23,12 @@ public class BeluUtils {
 		return new File(System.getProperty("java.io.tmpdir"), n);
 	}
 
+	/**
+	 * Sucht zum Pfad die Bilderauswahl.
+	 * @param path der Bilderpfad
+	 * @return die Textdatei-Definition zur Bilderauswahl, niemals <code>null</code>
+	 * @exception NullPointerException wenn Pfad gleich <code>null</code>
+	 */
 	public static File createImageSelectionTxt(String path) {
 		Objects.requireNonNull(path);
 		String p = path.replaceAll("[^a-zA-Z0-9]", "_").replaceAll("[_]+", "_");
