@@ -18,7 +18,12 @@
             "projectName": "belu",
             "args": [
                 "-file=C:\\Users\\bmash\\AppData\\Local\\Temp\\holeSeite_2019-04-21.htm",
-                "-out=C:\\Entwicklung\\Projekte\\belu\\demo"
+                "-use=(<li class=\"\"day current.+?</li>)",
+                "-var=weatherIcon:icon i-(\\d+)-xl",
+                "-var=weatherTemp:<span class=`large-temp`>(.*)&deg;\n</span>",
+                "-var=weatherCond:<span class=`cond`>(.*)\n</span>",
+                "-out=C:\\Entwicklung\\Projekte\\belu\\demo",
+                "-verbose=true"
             ]
         },
         {
@@ -62,12 +67,23 @@
                 "-path=\"C:\\Entwicklung\\Projekte\\belu\\demo\"",
                 ""
             ]
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "ArgsDemo",
+            "mainClass": "bob.belu.ArgsDemo",
+            "projectName": "belu",
+            "args": [
+                "-var=123",
+                "-var=1`2`3"
+            ]
         }
     ], 
     "compounds": [
         {
             "name": "BELU (komplett)",
-            "configurations": ["BilderOrdner", "BilderAuswahl", "BilderKopierer"]
+            "configurations": ["HoleSeite", "HeuteFinden", "BilderOrdner", "BilderAuswahl", "BilderKopierer"]
         }
     ]
 }

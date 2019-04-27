@@ -12,6 +12,8 @@
         var imageIndex = 0;
         var imageView = -1;
 
+        var monthNames = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+
         // Bilder in contentRight
         var maxWidth = 576;
         var maxHeight = 600;
@@ -26,13 +28,13 @@
                 var now = new Date();
                 // Datum
                 var day = now.getDate();
-                var month = now.getMonth() + 1;
+                var month = now.getMonth() + 0;
                 var year = now.getFullYear();
                 // Zeit
                 var hours = now.getHours();
                 var minutes = now.getMinutes();
                 // Ausgabe
-                document.getElementById("datum").innerHTML = xx(day) + "." + xx(month) + "." + year;
+                document.getElementById("datum").innerHTML = xx(day) + ". " + monthNames[month] + " " + year;
                 document.getElementById("zeit").innerHTML = xx(hours) + ":" + xx(minutes);
                 // console.log('date and time updated');
 
@@ -109,16 +111,16 @@
     </script>
     <style>
         :root {
-            --color-body-background: black;
-            --color-content-right: black;
+            --color-body-background: #c0c0c0;
+            --color-dashboard:#141f2e;
         }
         body {
             color: lightgrey;
             background-color: var(--color-body-background);
             margin: 0px auto;
             padding: 0px;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            font-size: 40px;
+            font-family: Impact;
+            font-size: 50px;
             overflow: hidden; /* TODO: korrekte Pixelabstände, statt Workaround */
         }
 
@@ -126,18 +128,25 @@
             position: absolute;
             width: 1024px;
             height: 767;
-            background-color: black;
+            background-color: var(--color-dashboard);
         }
 
-        #header {}
+        #header {
+            padding: 10px;
+            margin: 0;
+            display: contents;
+        }
 
         #datum {
             width: 256px;
             height: 100;
             line-height: 100px;
-            line-height: 100px;
             text-align: left;
-            float: left;
+
+            position: absolute;
+            height: 100;
+            line-height: 100px;
+            left: 15px;
         }
 
         #wetter {
@@ -145,6 +154,11 @@
             height: 100px;
             text-align: center;
             float: left;
+
+            position: absolute;
+            height: 100;
+            line-height: 100px;
+            left: 295px;
         }
 
         #icon {
@@ -154,6 +168,8 @@
             background-image: url("http://vortex.accuweather.com/adc2010/images/slate/icons/40.svg");
             background-repeat: no-repeat;
             background-size: cover;
+            margin: 13px;
+            background-size: 75%;
         }
 
         #temp-panel {
@@ -172,24 +188,25 @@
         #cond-panel {
             height: 100px;
             display: table;
+            float: left;
         }
 
         #cond-text {
-            font-size: 75%;
-            display: table-cell;
             vertical-align: middle;
         }
 
         #zeit {
-            width: 256px;
+            position: absolute;
+            width: 150px;
             height: 100;
             line-height: 100px;
             text-align: right;
-            float: left;
+            left: calc(1024px - 150px - 15px);
         }
 
         #content-panel {
             clear: both;
+            padding-top: 100px;
         }
 
         #content-left {
@@ -206,7 +223,6 @@
             width: calc(576px + 448px);
             height: 640px;
             float: left;
-            background-color: var(--color-content-right);
         }
 
         #canvas-image {
@@ -226,10 +242,10 @@
             <div id="datum">13. Jul 2018</div>
             <div id="wetter">
                 <div id="temp-panel"><span id="temp">29</span><span id="temp-small">&deg;C</span></div>
-                <div id="icon"></div>
                 <div id="cond-panel">
                     <div id="cond-text">Windig, nachts einige Schauer</div>
                 </div>
+                <div id="icon"></div>
             </div>
             <div id="zeit">07:35</div>
         </div>

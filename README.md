@@ -18,7 +18,7 @@ Daten abrufen; schreibt `%TEMP%/holeSeite_YYYY-MM-DD.htm`
 
 `bob.belu.HoleSeite -url=https://...`
 
-Infos extrahieren
+Infos extrahieren; Symbole ist Nummer aus Dateiname (z.B. 16 aus http://vortex.accuweather.com/adc2010/images/slate/icons/16.svg)
 
 `bob.belu.HeuteFinden -file=%TEMP%/holeSeite_YYYY-MM-DD.htm`
 
