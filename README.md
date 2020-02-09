@@ -43,3 +43,5 @@ Bilder kopieren
 - `systemctl (start|stop) vncserver-virtuald.service`
 - `systemctl (enable|disable) vncserver-virtuald.service`
 - `/home/pi/belu_run_all.sh`
+
+neue Schriften nach `/home/pi/.fonts` kopieren, dann `fc-cache -v -f` starten
