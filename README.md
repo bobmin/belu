@@ -38,5 +38,8 @@ Bilder kopieren
 
 ## Raspberry Pi
 
+- `sudo raspi-config`
+- `sudo apt-get update`
 - `systemctl (start|stop) vncserver-virtuald.service`
 - `systemctl (enable|disable) vncserver-virtuald.service`
+- `/home/pi/belu_run_all.sh`
