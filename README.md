@@ -35,3 +35,8 @@ Bilder auswählen
 Bilder kopieren
 
 `bob.belu.BilderKopierer -path=X:\Bilder -to=C:\Web\belu`
+
+## Raspberry Pi
+
+- `systemctl (start|stop) vncserver-virtuald.service`
+- `systemctl (enable|disable) vncserver-virtuald.service`
