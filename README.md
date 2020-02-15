@@ -46,6 +46,8 @@ Bilder kopieren
 
 neue Schriften nach `/home/pi/.fonts` kopieren, dann `fc-cache -v -f` starten
 
+siehe auch: [Raspberry Pi – Stabiler 24/7 Dauerbetrieb](https://www.datenreise.de/raspberry-pi-stabiler-24-7-dauerbetrieb/)
+
 ## Exif
 
 - [ExifTool by Phil Harvey](https://exiftool.org/)
