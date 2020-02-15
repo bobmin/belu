@@ -45,3 +45,8 @@ Bilder kopieren
 - `/home/pi/belu_run_all.sh`
 
 neue Schriften nach `/home/pi/.fonts` kopieren, dann `fc-cache -v -f` starten
+
+## Exif
+
+- [ExifTool by Phil Harvey](https://exiftool.org/)
+- [Exif Orientation Tag](http://sylvana.net/jpegcrop/exif_orientation.html)
