@@ -35,3 +35,20 @@ Bilder auswählen
 Bilder kopieren
 
 `bob.belu.BilderKopierer -path=X:\Bilder -to=C:\Web\belu`
+
+## Raspberry Pi
+
+- `sudo raspi-config`
+- `sudo apt-get update`
+- `systemctl (start|stop) vncserver-virtuald.service`
+- `systemctl (enable|disable) vncserver-virtuald.service`
+- `/home/pi/belu_run_all.sh`
+
+neue Schriften nach `/home/pi/.fonts` kopieren, dann `fc-cache -v -f` starten
+
+siehe auch: [Raspberry Pi – Stabiler 24/7 Dauerbetrieb](https://www.datenreise.de/raspberry-pi-stabiler-24-7-dauerbetrieb/)
+
+## Exif
+
+- [ExifTool by Phil Harvey](https://exiftool.org/)
+- [Exif Orientation Tag](http://sylvana.net/jpegcrop/exif_orientation.html)
