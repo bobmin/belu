@@ -34,7 +34,8 @@
                 var hours = now.getHours();
                 var minutes = now.getMinutes();
                 // Ausgabe
-                document.getElementById("datum").innerHTML = xx(day) + ". " + monthNames[month] + " " + year;
+                //document.getElementById("datum").innerHTML = xx(day) + ". " + monthNames[month] + " " + year;
+                document.getElementById("datum").innerHTML = xx(day) + "." + xx(month) + "." + year;
                 document.getElementById("zeit").innerHTML = xx(hours) + ":" + xx(minutes);
                 // console.log('date and time updated');
 
@@ -112,22 +113,22 @@
     <style>
         :root {
             --color-body-background: #c0c0c0;
-            --color-dashboard:#141f2e;
+            --color-dashboard:#000000;
         }
         body {
             color: lightgrey;
-            background-color: var(--color-body-background);
+            /* background-color: var(--color-body-background); */
             margin: 0px auto;
             padding: 0px;
-            font-family: Impact;
+            font-family: 'LCD AT&T Phone';
             font-size: 50px;
             overflow: hidden; /* TODO: korrekte Pixelabstände, statt Workaround */
         }
 
         #dashboard {
-            position: absolute;
+            /* position: absolute; */
             width: 1024px;
-            height: 767;
+            height: 767px;
             background-color: var(--color-dashboard);
         }
 
@@ -138,15 +139,46 @@
         }
 
         #datum {
-            width: 256px;
-            height: 100;
-            line-height: 100px;
+            top: 0px;
             text-align: left;
 
             position: absolute;
+
+            width: 256px;
+            height: 75px; 
+            padding-top: 25px;
+            
+            transform: translate(15px,670px);
+
+            opacity: 0.6;
+            /* background-color: coral; */
+        }
+
+        #zeit {
+            top: 0px;
+            text-align: right;
+
+            position: absolute;
+            width: 150px;
             height: 100;
             line-height: 100px;
-            left: 15px;
+            left: calc(1024px - 150px - 15px);
+
+            transform: translate(0px,670px);
+
+            opacity: 0.6;
+            /* background-color: coral; */
+        }
+
+        #content-right {
+            position: absolute;
+            height: 640px;
+            width: calc(576px + 448px);
+
+            /*
+            float: left;
+            */
+            transform: translate(0px,-100px);
         }
 
         #wetter {
@@ -159,6 +191,8 @@
             height: 100;
             line-height: 100px;
             left: 295px;
+
+            display: none;
         }
 
         #icon {
@@ -195,15 +229,6 @@
             vertical-align: middle;
         }
 
-        #zeit {
-            position: absolute;
-            width: 150px;
-            height: 100;
-            line-height: 100px;
-            text-align: right;
-            left: calc(1024px - 150px - 15px);
-        }
-
         #content-panel {
             clear: both;
             padding-top: 100px;
@@ -219,12 +244,6 @@
             display: none;
         }
 
-        #content-right {
-            width: calc(576px + 448px);
-            height: 640px;
-            float: left;
-        }
-
         #canvas-image {
             height: 640px;
             padding-left: 0;
@@ -238,17 +257,6 @@
 
 <body>
     <div id="dashboard">
-        <div id="header">
-            <div id="datum">13. Jul 2018</div>
-            <div id="wetter">
-                <div id="temp-panel"><span id="temp">29</span><span id="temp-small">&deg;C</span></div>
-                <div id="cond-panel">
-                    <div id="cond-text">Windig, nachts einige Schauer</div>
-                </div>
-                <div id="icon"></div>
-            </div>
-            <div id="zeit">07:35</div>
-        </div>
         <div id="content-panel">
             <div id="content-left">
                 <table>
@@ -278,6 +286,17 @@
                 <canvas id="canvas-image"></canvas>
             </div>
         </div>
+    </div>
+    <div id="header">
+        <div id="datum">13.07.1972</div>
+        <div id="wetter">
+            <div id="temp-panel"><span id="temp">29</span><span id="temp-small">&deg;C</span></div>
+            <div id="cond-panel">
+                <div id="cond-text">Windig, nachts einige Schauer</div>
+            </div>
+            <div id="icon"></div>
+        </div>
+        <div id="zeit">07:35</div>
     </div>
     <script>
         window.onload = function () {
